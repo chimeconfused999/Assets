@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StickmanScript : MonoBehaviour
-{
+{ 
     public float speed;
     public Rigidbody2D myRigidBody;
     private float move;
@@ -25,12 +25,13 @@ public class StickmanScript : MonoBehaviour
        {
             myRigidBody.AddForce(new Vector2(myRigidBody.velocity.x, jump));
             Debug.Log("Jumping");
+            isjumping = true;
        }
-     
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-         if (other.gameObject.CompareTag("Ground"))
+         if (other.gameObject.tag == "Ground")
          {
             Debug.Log("The player is not jumping");
             isjumping = false;
@@ -39,11 +40,10 @@ public class StickmanScript : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-         if (other.gameObject.CompareTag("Ground"))
+         if (other.gameObject.tag != "Ground")
          {
             Debug.Log("The player is jumping");
             isjumping = true;
          }
     }
-}
 }
